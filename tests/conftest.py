@@ -176,7 +176,7 @@ def vrecords(request, connect, vcollection, dim):
     entities = [
         {"name": Field_Vector, "values": vectors, "type": DataType.FLOAT_VECTOR}
     ]
-    connect.insert(vcollection, entities)
+    connect.bulk_insert(vcollection, entities)
 
     return vcollection
 
@@ -192,7 +192,7 @@ def virecords(request, connect, vicollection, dim):
 
     ids = [i for i in range(10000)]
 
-    connect.insert(vcollection, entities, ids)
+    connect.bulk_insert(vcollection, entities, ids)
 
     return vcollection
 
@@ -207,7 +207,7 @@ def ivrecords(request, connect, hvcollection, dim):
         {"name": Field_Integer, "values": integers, "type": DataType.INT64},
         {"name": Field_Vector, "values": vectors, "type": DataType.FLOAT_VECTOR}
     ]
-    connect.insert(vcollection, entities)
+    connect.bulk_insert(vcollection, entities)
 
     return hvcollection
 
@@ -223,6 +223,6 @@ def ivirecords(request, connect, hvicollection, dim):
         {"name": Field_Vector, "values": vectors, "type": DataType.FLOAT_VECTOR}
     ]
     ids = [i for i in range(10000)]
-    connect.insert(vcollection, entities, ids)
+    connect.bulk_insert(vcollection, entities, ids)
 
     return hvcollection
