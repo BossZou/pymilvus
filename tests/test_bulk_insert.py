@@ -20,7 +20,8 @@ class TestBulkInsert:
         ]
 
         try:
-            connect.bulk_insert(vcollection, entities)
+            ids = connect.bulk_insert(vcollection, entities)
+            assert len(ids) == 10000
         except Exception as e:
             pytest.fail("Unexpected MyError: {}".format(str(e)))
 

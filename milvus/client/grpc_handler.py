@@ -533,7 +533,6 @@ class GrpcHandler(AbsMilvus):
 
         rf = self._stub.DeleteByID.future(request, wait_for_ready=True, timeout=timeout)
         status = rf.result()
-        # status = self._stub.DeleteByID.future(request).result(timeout=timeout)
         if status.error_code != 0:
             raise BaseError(status.error_code, status.reason)
 
@@ -546,7 +545,7 @@ class GrpcHandler(AbsMilvus):
         if kwargs.get("_async", False):
             cb = kwargs.get("_callback", None)
             return FlushFuture(future, cb)
-        response = future.done()
+        response = future.result()
         if response.error_code != 0:
             raise BaseError(response.error_code, response.reason)
 

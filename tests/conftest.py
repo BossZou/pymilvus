@@ -84,7 +84,7 @@ def vcollection(request, connect, dim):
         "fields": [
             {"name": Field_Vector, "type": DataType.FLOAT_VECTOR, "params": {"dim": dim}},
         ],
-        "segment_row_limit": 8192,
+        "segment_row_limit": 100000,
         "auto_id": True
     }
 
@@ -159,8 +159,8 @@ def hvicollection(request, connect, dim):
     connect.create_collection(collection_name, collection_param)
 
     def teardown():
-        table_names = connect.list_collections()
-        for name in table_names:
+        collection_names = connect.list_collections()
+        for name in collection_names:
             connect.drop_collection(name)
 
     request.addfinalizer(teardown)
@@ -177,6 +177,7 @@ def vrecords(request, connect, vcollection, dim):
         {"name": Field_Vector, "values": vectors, "type": DataType.FLOAT_VECTOR}
     ]
     connect.bulk_insert(vcollection, entities)
+    connect.flush([vcollection])
 
     return vcollection
 
