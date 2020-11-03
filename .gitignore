@@ -1,4 +1,5 @@
-# Pycharm IDE
+# IDE
+## Pycharm
 /.idea
 
 # Cache files
@@ -10,7 +11,7 @@ dist
 *.egg
 *.egg-info
 
-# Setup files
+# Doc files
 doc/build/
 
 # Codecov files
